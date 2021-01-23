@@ -31,18 +31,46 @@ body {
     font-family: 'Open Sans', Arial, sans-serif;
     font-weight: 300;
     font-size: 22px;
+    overflow: auto; /* Hide scrollbars */
+    filter: blur(15px);
+    transition: filter 0.5s;
 }
 
 .weather {
     width: 80%;
     height: 100%;
     margin: 0 auto;
-    padding: 20px 0;
+    padding-top: 10px;
+    padding-bottom: 40px;
     box-sizing: border-box;
     white-space: nowrap; /* So text would be on 1 line */
 }
 
 .weather__search {
+    width: 90%;
+    padding: 15px 10px;
+    border:none;
+    background-color: rgba(255,255,255,0.2);
+    font-size: 20px;
+    color: inherit;
+    margin-bottom: 20px;
+    border-radius: 20px;
+}
+
+.search__button {
+    width: 10%;
+    padding: 15px 10px;
+    border:1px solid white;
+    background-color: rgba(255,255,255,0.2);
+    font-size: 20px;
+    color: inherit;
+    margin-bottom: 20px;
+    border-radius: 20px;
+
+}
+@media (max-width: 991px) {
+    .weather__search {
+    display: flex;
     width: 100%;
     padding: 15px 10px;
     border:none;
@@ -51,6 +79,24 @@ body {
     color: inherit;
     margin-bottom: 20px;
     border-radius: 20px;
+    }
+
+    .search__button {
+        width: 100%;
+        padding: 15px 10px;
+        border:1px solid white;
+        background-color: rgba(255,255,255,0.2);
+        font-size: 20px;
+        color: inherit;
+        margin-bottom: 20px;
+        border-radius: 20px;
+        transition: 1s;
+    }
+}
+
+.search__button:hover {
+    color: lightblue;
+    cursor: pointer;
 }
 
 .weather__search::placeholder {
@@ -137,8 +183,19 @@ body {
     min-width: 150px;
     width: calc(20% - 20px);
     flex-grow: 1;
+    border: 0px;
+    transition: filter 2s;
 }
+
+.weather_forecast__item:hover {
+    border: solid 1px #fff;
+}   
 
 .weather__forecast__day {
     margin-bottom: 10px;
+}
+
+.weather__description {
+    text-align: center;
+    font-size: 15px;
 }

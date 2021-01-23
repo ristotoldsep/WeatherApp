@@ -8,10 +8,16 @@
 </head>
 <body>
     <div class="weather">
-        <input type="search" class="weather__search" placeholder="Search for a city... (press ENTER)">
+        <input type="search" list="suggestions" class="weather__search" placeholder="Search for a location...">
+        <input class="search__button" type="submit" value="Search">
+        <datalist id="suggestions">
+           <!--  <option value="Tallinn"></option>
+            <option value="London"></option> -->
+            <!-- WILL ADD OPTIONS HERE WITH JS -->
+        </datalist>
         <div class="weather__today">
             <div class="weather__details">
-                <h2 class="weather__city">City</h2>          
+                <h2 class="weather__city">Location</h2>          
                 <p class="weather__date">Date</p>  
                 <div class="weather__current">
                     <p class="weather__indicator weather__indicator--humidity"><span class="value">50</span>%</p>
@@ -19,12 +25,14 @@
                     <p class="weather__indicator weather__indicator--pressure"><span class="value">1050</span>hPa</p>
                 </div>
             </div>
-            <img src="images/clear-sky.png" alt="Clear Sky" class="weather__image">
+            <div>
+                <img src="images/clear-sky.png" alt="Clear Sky" class="weather__image">
+                <p class="weather__description"><span class="value"></span></p>
+            </div>
             <div class="weather__temperature">
                 <span class="value">+25</span>&deg;C
                 <div class="weather__temperature__feels-like">Feels like: <span class="value"></span></div>
             </div>
-            
         </div>
         <div class="weather__forecast">
             <article class="weather_forecast__item">
