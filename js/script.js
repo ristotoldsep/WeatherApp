@@ -11,7 +11,7 @@ let temperature = document.querySelector('.weather__temperature>.value');
 let temperatureFeelsLike = document.querySelector('.weather__temperature__feels-like>.value');
 
 //Api key for OpenWeatherMap API
-const weatherAPIKey = config.WeatherAPIKey || WeatherAPIKey;
+const weatherAPIKey =  WeatherAPIKey;
 let weatherBaseEndpoint = 'https://api.openweathermap.org/data/2.5/weather?units=metric&appid=' + weatherAPIKey;
 
 //Creating the API Call function
