@@ -63,6 +63,14 @@ body {
     flex-wrap: wrap;
 }
 
+.weather__date {
+    font-size: 18px;
+}
+.weather__date__small {
+    font-size: 16px;
+    margin:0;
+}
+
 .weather__image {
     width: 30vmin;
     align-self: center;
@@ -129,4 +137,8 @@ body {
     min-width: 150px;
     width: calc(20% - 20px);
     flex-grow: 1;
+}
+
+.weather__forecast__day {
+    margin-bottom: 10px;
 }
