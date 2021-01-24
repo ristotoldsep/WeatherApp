@@ -57,6 +57,10 @@ body {
     border-radius: 20px;
 }
 
+.weather__search:focus {
+    outline:none;
+}
+
 .search__button {
     width: 10%;
     padding: 15px 10px;
@@ -66,8 +70,12 @@ body {
     color: inherit;
     margin-bottom: 20px;
     border-radius: 20px;
-
 }
+
+.search__button:focus {
+    outline:none;
+}
+
 @media (max-width: 991px) {
     .weather__search {
     display: flex;
