@@ -130,10 +130,20 @@ body {
     align-self: center;
 }
 
+.weather__city_container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
 .weather__city {
     font-size: 36px;
     font-weight: 600;
     margin: 20px 0;
+}
+
+.weather__city_flag {
+    width: 40px;
 }
 
 .weather__day {

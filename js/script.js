@@ -1,8 +1,11 @@
 // Selecting all the DOM elements
+
 let searchInput = document.querySelector('.weather__search');
 let searchButton = document.querySelector('.search__button');
 let city = document.querySelector('.weather__city');
+let flag = document.querySelector('.weather__city_flag');
 let date = document.querySelector('.weather__date');
+let notifications = document.querySelector('.notifications');
 let humidity = document.querySelector('.weather__indicator--humidity>.value'); //>.value to target the inner span!!!
 let wind = document.querySelector('.weather__indicator--wind>.value');
 let pressure = document.querySelector('.weather__indicator--pressure>.value');
@@ -14,10 +17,11 @@ let weatherDescription = document.querySelector('.weather__description>.value');
 let datalist = document.getElementById('suggestions');
 
 //Api key for OpenWeatherMap API & Basic URL endpoints
-const weatherAPIKey = config.WeatherAPIKey || process.env.WeatherAPIKey;
+const weatherAPIKey = process.env.WeatherAPIKey;
 const weatherBaseEndpoint = 'https://api.openweathermap.org/data/2.5/weather?units=metric&appid=' + weatherAPIKey;
 const forecastBaseEndpoint = 'https://api.openweathermap.org/data/2.5/forecast?units=metric&appid=' + weatherAPIKey;
 const geocodingBaseEndpoint = 'http://api.openweathermap.org/geo/1.0/direct?limit=5&appid=' + weatherAPIKey + '&q=';
+const countryFlagEndpoint = 'https://countryflagsapi.com/png/';
 
 //Array for weather images (to make the main image dynamic) (IDs from openweathermap api home page)
 let weatherImages = [
@@ -63,6 +67,7 @@ let weatherImages = [
 //Function which gets the city
 const weatherForCity = async (city) => {
     let weather = await getWeatherByCityName(city);
+    console.log(weather);
     if (weather.cod == 404) {
         alert(weather.message);
         return;
@@ -128,6 +133,14 @@ let getWeatherByCityName = async (city) => {
 }
 //getWeatherByCityName('Tallinn');
 
+let getCountryFlag = async (countryCode) => {
+   const response = await fetch(`https://countryflagsapi.com/png/${countryCode}`)
+    const blob = await response.blob();
+
+    return blob;    
+}
+// getCountryFlag();
+
 let getForecastByCityID = async (id) => {
     let endpoint = forecastBaseEndpoint + '&id=' + id;
 
@@ -155,9 +168,20 @@ let getForecastByCityID = async (id) => {
 }
 
 // Function to update the weather on front-end
-let updateWeather = (data) => {
+let updateWeather = async (data) => {
     city.textContent = data.name + ', ' + data.sys.country;
+    
+    const flagImage = await getCountryFlag(data.sys.country.toLowerCase());
+    const flagURL = URL.createObjectURL(flagImage);
+
+    flag.src = flagURL;
+     
     date.textContent = dayOfTheWeek() + ', ' + dateString();
+
+    // console.log(dateString() == 'Feb 24' ? 'YEAHHH' : 'Nah');
+
+    notifications.textContent = dateString() == 'Feb 24' ? 'Palju õnne Eesti! 🥳' : '';
+ 
     humidity.textContent = data.main.humidity;
     temperature.textContent = data.main.temp > 0 ? '+' + Math.round(data.main.temp) : Math.round(data.main.temp);
     pressure.textContent = data.main.pressure;
@@ -231,6 +255,7 @@ let dateString = (dt = new Date().getTime()) => {
 }
 
 const init = async (city) => {
+   
     await weatherForCity('Tallinn');
     document.body.style.filter = 'blur(0)'; //WAITS UNTIL THE PAGE IS LOADED, THEN REMOVES FILTER!
 }

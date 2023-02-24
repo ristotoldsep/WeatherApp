@@ -19,8 +19,12 @@
         </datalist>
         <div class="weather__today">
             <div class="weather__details">
-                <h2 class="weather__city">Location</h2>          
-                <p class="weather__date">Date</p>  
+                <div class="weather__city_container">
+                    <img class="weather__city_flag" src="./images/eesti.jpg" />
+                    <h2 class="weather__city">Location</h2>          
+                </div>
+                <p class="weather__date">Date</p>
+                <p class="notifications"></p>
                 <div class="weather__current">
                     <p class="weather__indicator weather__indicator--humidity"><span class="value">51</span>%</p>
                     <p class="weather__indicator weather__indicator--wind"><span class="value">West, 5</span>m/s</p>
@@ -65,7 +69,6 @@
         </div>
     </div>
 
-    <script type='text/javascript' src='config.js'></script>
     <script src="js/script.js"></script>
 </body>
 </html>
