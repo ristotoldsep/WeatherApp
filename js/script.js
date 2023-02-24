@@ -15,9 +15,11 @@ let temperatureFeelsLike = document.querySelector('.weather__temperature__feels-
 let forecastBlock = document.querySelector('.weather__forecast');
 let weatherDescription = document.querySelector('.weather__description>.value');
 let datalist = document.getElementById('suggestions');
+// Import the API key from the config.js file
+import { apiKey } from './config.js';
 
 //Api key for OpenWeatherMap API & Basic URL endpoints
-const weatherAPIKey = process.env.WeatherAPIKey;
+const weatherAPIKey = apiKey;
 const weatherBaseEndpoint = 'https://api.openweathermap.org/data/2.5/weather?units=metric&appid=' + weatherAPIKey;
 const forecastBaseEndpoint = 'https://api.openweathermap.org/data/2.5/forecast?units=metric&appid=' + weatherAPIKey;
 const geocodingBaseEndpoint = 'http://api.openweathermap.org/geo/1.0/direct?limit=5&appid=' + weatherAPIKey + '&q=';
