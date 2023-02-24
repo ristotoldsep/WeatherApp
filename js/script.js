@@ -32,7 +32,7 @@ let weatherImages = [
         ids: [800]
     },
     {
-        url: '../images/broken-clouds.png',
+        url: '/images/broken-clouds.png',
         ids: [803, 804]
     },
     {
