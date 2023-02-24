@@ -177,12 +177,15 @@ let updateWeather = async (data) => {
     const flagURL = URL.createObjectURL(flagImage);
 
     flag.src = flagURL;
+    
+
+
      
     date.textContent = dayOfTheWeek() + ', ' + dateString();
 
     // console.log(dateString() == 'Feb 24' ? 'YEAHHH' : 'Nah');
 
-    notifications.textContent = dateString() == 'Feb 24' ? 'Palju õnne Eesti! 🥳' : '';
+    notifications.textContent = (dateString() == 'Feb 24' && data.sys.country == 'EE') ? 'Palju õnne Eesti! 🥳' : '';
  
     humidity.textContent = data.main.humidity;
     temperature.textContent = data.main.temp > 0 ? '+' + Math.round(data.main.temp) : Math.round(data.main.temp);
