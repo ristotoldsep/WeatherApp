@@ -22,7 +22,7 @@ import { apiKey } from './config.js';
 const weatherAPIKey = apiKey;
 const weatherBaseEndpoint = 'https://api.openweathermap.org/data/2.5/weather?units=metric&appid=' + weatherAPIKey;
 const forecastBaseEndpoint = 'https://api.openweathermap.org/data/2.5/forecast?units=metric&appid=' + weatherAPIKey;
-const geocodingBaseEndpoint = 'http://api.openweathermap.org/geo/1.0/direct?limit=5&appid=' + weatherAPIKey + '&q=';
+const geocodingBaseEndpoint = 'https://api.openweathermap.org/geo/1.0/direct?limit=5&appid=' + weatherAPIKey + '&q=';
 const countryFlagEndpoint = 'https://countryflagsapi.com/png/';
 
 //Array for weather images (to make the main image dynamic) (IDs from openweathermap api home page)
@@ -219,7 +219,7 @@ let updateForecast = (forecast) => {
     forecastBlock.innerHTML = ''; //First we delete the previous data!!!!
 
     forecast.forEach((day) => {
-        let iconURL = 'http://openweathermap.org/img/wn/' + day.weather[0].icon + '@2x.png';
+        let iconURL = 'https://openweathermap.org/img/wn/' + day.weather[0].icon + '@2x.png';
 
         let dayName = dayOfTheWeek(day.dt * 1000) //To get milliseconds...
         //console.log(dayName);
