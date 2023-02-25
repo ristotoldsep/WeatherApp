@@ -152,6 +152,10 @@ body {
     font-weight: 400;
 }
 
+.additional-info {
+    font-size: 14px;
+}
+
 /* TO ADD ICONS IN FRONT OF WEATHER INDICATORS */
 .weather__indicator::before {
     content: '';
@@ -161,6 +165,9 @@ body {
     height: 30px;
     background-size: cover;
     margin-right: 10px;
+}
+.weather__indicator--clock::before {
+    background-image: url(../images/clock.png);
 }
 .weather__indicator--humidity::before {
     background-image: url(../images/humidity.png);

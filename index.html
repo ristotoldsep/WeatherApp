@@ -26,6 +26,7 @@
                 <p class="weather__date">Date</p>
                 <p class="notifications"></p>
                 <div class="weather__current">
+                    <p class="weather__indicator weather__indicator--clock"><span class="value">18:00</span></p>
                     <p class="weather__indicator weather__indicator--humidity"><span class="value">51</span>%</p>
                     <p class="weather__indicator weather__indicator--wind"><span class="value">West, 5</span>m/s</p>
                     <p class="weather__indicator weather__indicator--pressure"><span class="value">1050</span>hPa</p>
@@ -37,7 +38,13 @@
             </div>
             <div class="weather__temperature">
                 <span class="value">+25</span>&deg;C
-                <div class="weather__temperature__feels-like">Feels like: <span class="value"></span></div>
+                <div class="weather__temperature__feels-like">Feels like: <span class="value"></span>
+                    <hr>
+                <div class="additional-info">
+                    <p class="sunrise">Sunrise: <span class="value"></span></p>
+                    <p class="sunset">Sunset: <span class="value"></span></p>
+                </div>
+                </div>
             </div>
         </div>
         <div class="weather__forecast">

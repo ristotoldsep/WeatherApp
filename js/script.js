@@ -6,12 +6,17 @@ let city = document.querySelector('.weather__city');
 let flag = document.querySelector('.weather__city_flag');
 let date = document.querySelector('.weather__date');
 let notifications = document.querySelector('.notifications');
+let clock = document.querySelector('.weather__indicator--clock>.value'); //>.value to target the inner span!!!
 let humidity = document.querySelector('.weather__indicator--humidity>.value'); //>.value to target the inner span!!!
 let wind = document.querySelector('.weather__indicator--wind>.value');
 let pressure = document.querySelector('.weather__indicator--pressure>.value');
 let image = document.querySelector('.weather__image');
 let temperature = document.querySelector('.weather__temperature>.value');
 let temperatureFeelsLike = document.querySelector('.weather__temperature__feels-like>.value');
+
+let sunrise = document.querySelector('.sunrise>.value');
+let sunset = document.querySelector('.sunset>.value');
+
 let forecastBlock = document.querySelector('.weather__forecast');
 let weatherDescription = document.querySelector('.weather__description>.value');
 let datalist = document.getElementById('suggestions');
@@ -136,7 +141,7 @@ let getWeatherByCityName = async (city) => {
 //getWeatherByCityName('Tallinn');
 
 let getCountryFlag = async (countryCode) => {
-   const response = await fetch(`https://countryflagsapi.com/png/${countryCode}`)
+   const response = await fetch(`${countryFlagEndpoint}${countryCode}`);
     const blob = await response.blob();
 
     return blob;    
@@ -169,6 +174,14 @@ let getForecastByCityID = async (id) => {
     return daily;
 }
 
+let getCountryTimeByCoordinates = async (lat, long) => {
+    const response = await fetch(`https://api.ipgeolocation.io/timezone?apiKey=6f445dc3165b4b84abfb5be8ae9a6ffe&lat=${lat}&long=${long}`)
+    
+    const data = await response.json()
+
+    return data
+}
+
 // Function to update the weather on front-end
 let updateWeather = async (data) => {
     city.textContent = data.name + ', ' + data.sys.country;
@@ -178,20 +191,23 @@ let updateWeather = async (data) => {
 
     flag.src = flagURL;
     
-
-
-     
     date.textContent = dayOfTheWeek() + ', ' + dateString();
+
+    /** GET TIME */
+    const countryTime = await getCountryTimeByCoordinates(data.coord.lat, data.coord.lon);
 
     // console.log(dateString() == 'Feb 24' ? 'YEAHHH' : 'Nah');
 
     notifications.textContent = (dateString() == 'Feb 24' && data.sys.country == 'EE') ? 'Palju õnne Eesti! 🥳' : '';
- 
+    clock.textContent = countryTime.time_24;
     humidity.textContent = data.main.humidity;
     temperature.textContent = data.main.temp > 0 ? '+' + Math.round(data.main.temp) : Math.round(data.main.temp);
     pressure.textContent = data.main.pressure;
     temperatureFeelsLike.textContent = data.main.feels_like > 0 ? '+' + data.main.feels_like : data.main.feels_like;
     weatherDescription.textContent = data.weather[0].main;
+
+    sunrise.textContent = unixTimeToTimeString(data.sys.sunrise);
+    sunset.textContent = unixTimeToTimeString(data.sys.sunset);
 
     let windDirection;
     let deg = data.wind.deg;
@@ -242,6 +258,17 @@ let updateForecast = (forecast) => {
        forecastBlock.insertAdjacentHTML('beforeend', forecastItem);
     });
 }
+
+let unixTimeToTimeString = (unixTime) => {
+  const date = new Date(unixTime * 1000); // Convert Unix timestamp to milliseconds
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
+  return `${hours.toString().padStart(2, "0")}:${minutes
+    .toString()
+    .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+}
+
 
 //Function to get the day of the week
 let dayOfTheWeek = (dt = new Date().getTime()) => {
