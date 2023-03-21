@@ -141,7 +141,7 @@ let getWeatherByCityName = async (city) => {
 //getWeatherByCityName('Tallinn');
 
 let getCountryFlag = async (countryCode) => {
-   const response = await fetch(`${countryFlagEndpoint}${countryCode}`);
+    const response = await fetch(`${countryFlagEndpoint}${countryCode}`);
     const blob = await response.blob();
 
     return blob;    
@@ -186,10 +186,12 @@ let getCountryTimeByCoordinates = async (lat, long) => {
 let updateWeather = async (data) => {
     city.textContent = data.name + ', ' + data.sys.country;
     
-    const flagImage = await getCountryFlag(data.sys.country.toLowerCase());
-    const flagURL = URL.createObjectURL(flagImage);
+    // const flagImage = await getCountryFlag(data.sys.country.toLowerCase());
+    // const flagURL = URL.createObjectURL(flagImage);
 
-    flag.src = flagURL;
+    // flag.src = flagURL;
+
+    flag.src = `https://flagsapi.com/${data.sys.country}/shiny/64.png`
     
     date.textContent = dayOfTheWeek() + ', ' + dateString();
 
